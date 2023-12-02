@@ -1,0 +1,123 @@
+{% extends 'basic1.html' %}
+
+{% block body %}
+{% load static %}
+
+{% csrf_token %}
+<div class="container" style="margin-right:90px; margin-top:100px;">
+	{% for r in res %}
+	<h1> Welcome, {{r.first_name}}</h1>
+	{% endfor %}
+</div>
+
+<div class="container" style="margin-right:90px; margin-top:50px;">
+	{% if messages %}
+	{% for message in messages %}
+	<div class="container" style="margin-right:90px; margin-top:10px;">
+		<div class="alert alert-{{ message.tags }} alert-dismissible show" role="alert">
+			<h4 class="alert-heading"> {{ message }}</h4>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-15px;">
+				<span aria-hidden="true"></span>
+			</button>
+		</div>
+	</div>
+	{% endfor %}
+	{% endif %}
+	<div class="container-fluid tm-main" style="background-color:#2f4f4f; color:#FFFFFF;">
+		{% for r in res %}
+		<form action='editprofile1' method="post">
+			{% csrf_token %}
+			<br>
+			<h3>Edit Profile</h3>
+			<div class="row">
+				<div class="col-md-6 col-sm-12 tm-contact-col">
+					<div class="contact_message">
+						<div class="contact" class="contact-form">
+							<div class="1">
+								<div class="form-group">
+									<br><label class="label">Firstname : </label>
+									<input type="text" id="first_name" name="first_name" class="form-control"
+										value="{{r.first_name}}" required disabled>
+								</div>
+								<div class="form-group">
+									<label class="label">Lastname : </label>
+									<input type="text" id="last_name" name="last_name" class="form-control"
+										value="{{r.last_name}}" required disabled>
+								</div>
+								<div class="form-group">
+									<label class="label">Email : </label>
+									<input type="text" id="email" name="email" class="form-control" value="{{r.email}}"
+										required disabled>
+								</div>
+								<div class="form-group">
+									<label class="label">Password : </label>
+									<input type="text" id="n_pass" name="n_pass" class="form-control"
+										value="{{r.n_pass}}" required>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 tm-contact-col">
+					<div class="tm-address-box">
+						<div class="form-group">
+							<br><label class="label">Department : </label>
+							<input type="text" id="department1" name="department1" class="form-control"
+								value="{{r.department}}" required disabled>
+							<!-- <div class="rs-select2 js-select-simple select--no-search1">
+								<br><select name="department1" id="department1"
+									style="background-color:#FFFFFF;color:#000000" required>
+									<option disabled="disabled" selected="selected">Department</option>
+									{% for d_name in dept %}
+									<option>{{ d_name }}</option>
+									{% endfor %}
+								</select>
+								<div class="select-dropdown"></div> -->
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 tm-contact-col">
+					<div class="tm-address-box">
+						<div class="form-group">
+							<label class="label">Gender.: </label>
+							<input type="text" id="gender" name="gender" class="form-control" value="{{r.gender}}"
+								required disabled>
+							<!-- <div class="rs-select2 js-select-simple select--no-search1">
+								<br><select name="gender" id="gender" style="background-color:#FFFFFF;color:#000000"
+									required>
+									<option disabled="disabled" selected="selected">Gender</option>
+									{% for g_name in gen %}
+									<option>{{ g_name }}</option>
+									{% endfor %}
+								</select>
+								<div class="select-dropdown"></div>
+							</div> -->
+						</div>
+						<div class="form-group">
+							<label class="label">Mobile No.: </label>
+							<input class="form-control" type="text" id="phone" name="phone" value="{{r.phone}}"
+							style="background-color:#FFFFFF;color:#000000" required>
+						</div>
+						<div class="form-group">
+							<label class="label">Confirm Password : </label>
+							<input type="text" id="c_pass" name="c_pass" class="form-control" value="{{r.c_pass}}" required>
+						</div>
+						<button type="submit" class="btn tm-btn-submit tm-btn ml-auto"
+						style="background-color:#FFFFFF;color:#000000;">Save Profile</button>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+{% endfor %}
+</form>
+</div>
+</section>
+
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

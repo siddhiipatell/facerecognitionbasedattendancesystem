@@ -1,0 +1,69 @@
+{% extends "basic.html" %}
+
+{% load static %}
+
+<head>
+{% block title %}Student Login{% endblock %}
+    {% block cstyle %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock %}
+{% block script %}
+<script type="application/x-javascript">
+  addEventListener
+  ("load", function()
+  {
+  setTimeout(hideURLbar, 0);
+  },
+  false);
+  function hideURLbar()
+  { window.scrollTo(0,1);
+  }
+</script>
+    {% endblock %}
+</head>
+{% block pagecontent %}
+
+<div class="main-w3layouts wrapper" style="margin-top:40px;">
+	{% if messages %}
+        {% for message in messages %}
+			<div class="container" style="margin-right:90px; margin-top:10px;">
+                <div class="alert alert-{{ message.tags }} alert-dismissible show" role="alert">
+                  <h4 class="alert-heading"> {{ message }} </h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-15px;">
+                        <span aria-hidden="true"></span>
+                    </button>
+				</div>
+			</div>
+        {% endfor %}
+	{% endif %}
+		<div class="main-agileinfo ">
+			<div class="agileits-top">
+                <h1 style="color:#000033"><b>STUDENT LOGIN</b></h1>
+				<form action="S_Login" method="post">{% csrf_token %}
+					<input class="text email" type="email" name="email" id="email" placeholder="Email" required>
+                    <br><input class="text" type="password" name="c_pass"  id="c_pass" placeholder="Password" required></br>
+					<div class="wthree-text">
+						<div class="clear">
+                        </div>
+					</div>
+					<input type="submit" value="LOGIN">
+				</form>
+				<p><a href="{% url 'S_registration' %} ">Don't have an Account?  Sign Up!</a></p>
+			</div>
+		</div>
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+{% endblock %}
+

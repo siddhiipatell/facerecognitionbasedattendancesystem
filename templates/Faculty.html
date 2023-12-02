@@ -1,0 +1,64 @@
+{% extends 'basic1.html' %}
+
+{% block body %}
+ {% load static %}
+
+{% csrf_token %}
+<div class="container" style="margin-right:90px; margin-top:100px;">
+    {% for r in res %}
+    <h1> Welcome, {{r.first_name}}</h1>
+    {% endfor %}
+</div>
+
+<div class="container" style="margin-right:90px; margin-top:50px;">
+	{% if messages %}
+        				{% for message in messages %}
+						<div class="container" style="margin-right:90px; margin-top:10px;">
+                			<div class="alert alert-{{ message.tags }} alert-dismissible show" role="alert">
+                 	 			<h4 class="alert-heading"> {{ message }}</h4>
+                    				<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-top:-15px;">
+                        				<span aria-hidden="true"></span>
+                    				</button>
+							</div>
+						</div>
+						{% endfor %}
+					{% endif %}
+<div class="container-fluid tm-main" style="background-color:#2f4f4f; color:#FFFFFF;">
+<div class="tm-bg-transparent-black tm-contact-box-pad">
+							<div class="row mb-4">
+								<div class="col-sm-12">
+									<br><h1 class="tm-text-shadow"><b>Generate Code</b></h1>
+								</div>
+							</div>
+							<div class="row tm-page-4-content">
+								<div class="col-md-6 col-sm-12 tm-contact-col" >
+									<div class="contact_message">
+										<form action="#code" method="post" class="contact-form">{% csrf_token %}
+											<!-- <br><br><input type="text" id="sub_name" name="sub_name" class="form-control" placeholder="Enter subject" required> -->
+											<select name="sub_name" id="sub_name" class="form-control" style="background-color:#FFFFFF;color:#000000" required>
+												<option disabled="disabled" selected="selected">Select Subject</option>
+												{% for s_name in subname %}
+												<option>{{ s_name }}</option>
+												{% endfor %}
+											</select>
+												<br><input type="text" id="code" name="code" class="form-control" placeholder="Generate code" required>
+											<div class="vertical-center">
+											<br><button style="color:#000000;">Generate</button><br><br>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-12 tm-contact-col">
+									<div class="tm-address-box">
+										<br><br><br><p>DEAR FACULTY, PLEASE ENTER YOUR CLASS AUTHENTICATION CODE IN THE FORMAT codesubname (eg: 2345ai) FOR ATTENDANCE!</p>
+									</div>
+								</div>
+						</div>
+						</div>
+</div>
+
+</div>
+
+{% endblock %}
+
+

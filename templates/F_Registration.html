@@ -1,0 +1,186 @@
+{% extends "basic.html" %}
+{% load static %}
+<head>
+{% block title %}Faculty Registration{% endblock %}
+    {% block cstyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/select2/select2.min.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/datepicker/daterangepicker.css' %}" media="all">
+    {% endblock %}
+
+</head>
+{% block pagecontent %}
+<div class=" " style="background-color:#1bac91; padding-top:100px;background-repeat:no-repeat; background-size:1600px; padding-bottom:50px;">
+    <div class="wrapper wrapper--w680" >
+            <div class="card1 card-4" style="border:thin;">
+                <div class="card-body">
+                    <h1 class="title" style="color:#1bac91"><b>Faculty Registration Form</b></h1>
+                        <form action='F_Registration' onsubmit="return registration()" method="post">{% csrf_token %}
+                        <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">First Name</label>
+                                    <input class="input--style-4" type="text" id="first_name" name="first_name" required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Last Name</label>
+                                    <input class="input--style-4" type="text" id="last_name" name="last_name" required>
+                                </div>
+                            </div>
+                        </div>
+ <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Department</label>
+                                <div class="rs-select2 js-select-simple select--no-search1">
+                                <select name="department" id="department" required>
+                                    <option disabled="disabled" selected="selected">Choose option</option>
+                                    {% for d_name in dept %}
+									<option>{{ d_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+								</div>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                     <label class="label">Gender</label>
+                            <div class="rs-select2 js-select-simple select--no-search1">
+                                <select name="gender" id="gender" required>
+                                    <option disabled="disabled" selected="selected">Choose option</option>
+                                    {% for g_name in gen %}
+									<option>{{ g_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+								</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Phone Number</label>
+                                    <input class="input--style-4" type="text" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+						<div class="row row-space1">
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Create New Password</label>
+                                    <input class="input--style-4" type="password" id="n_pass" name="n_pass"   required>
+                                </div>
+                            </div>
+                            <div class="col-21">
+                                <div class="input-group1">
+                                    <label class="label">Confirm Password</label>
+                                    <input class="input--style-4" type="password" id="c_pass" name="c_pass"  required>
+                                </div>
+                            </div>
+                        </div>
+						<div class="row row-space1">
+                           <div class="p-t-15">
+                            <button  class="btn1 btn--radius-21 btn--blue"  type="submit" style="background-color:#1bac91">Submit</button>
+                        </div>
+                        </div>
+				 </form>
+                </div>
+            </div>
+    </div>
+</div>
+{% block js %}
+<script>
+function registration()
+{
+	var name= document.getElementById("first_name").value;
+	var email= document.getElementById("email").value;
+	var uname= document.getElementById("last_name").value;
+	var pwd= document.getElementById("n_pass").value;
+	var c_pwd= document.getElementById("c_pass").value;
+	var ph= document.getElementById("phone").value;
+	var d= document.getElementById("department");
+	var gend= document.getElementById("gender");
+
+
+    //email id expression code
+	var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+	var letters = /^[A-Za-z]+$/;
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	if(!letters.test(name))
+	{
+		alert('Name field required only alphabet characters');
+		return false;
+	}
+	else if (!filter.test(email))
+	{
+		alert('Invalid email');
+		return false;
+	}
+	else if(!letters.test(uname))
+	{
+		alert('User name field required only alphabet characters');
+		return false;
+	}
+	else if(!pwd_expression.test(pwd))
+	{
+		alert ('Upper case, Lower case, Special character and Numeric letter are required in Password filed');
+		return false;
+	}
+	else if(pwd != c_pwd)
+	{
+		alert ('Password not Matched');
+		return false;
+	}
+	else if(document.getElementById("n_pass").value.length < 6)
+	{
+		alert ('Password minimum length is 6');
+		return false;
+	}
+	else if(document.getElementById("n_pass").value.length > 12)
+	{
+		alert ('Password max length is 12');
+		return false;
+	}
+	else if(document.getElementById("phone").value.length < 10)
+	{
+		alert ('phone number minimum length is 10');
+		return false;
+	}
+	else if(document.getElementById("phone").value.length > 10)
+	{
+		alert ('phone number maximum length is 10');
+		return false;
+	}
+	else if(d.selectedIndex == 0 || d.options[d.selectedIndex].value == -1)
+	{
+		alert('Please select your department');
+		return false;
+	}
+	else if(gend.selectedIndex == 0 || gend.options[s.selectedIndex].value == -1)
+	{
+		alert('Please select your gender');
+		return false;
+	}
+}
+</script>
+    <script src="{% static 'css/vendor/jquery/jquery.min.js' %}" type ="text/javascript"></script>
+    <script src="{% static 'css/vendor/select2/select2.min.js' %}" type ="text/javascript"></script>
+    <script src="{% static 'css/vendor/datepicker/moment.min.js' %}" type ="text/javascript"></script>
+    <script src="{% static 'css/vendor/datepicker/daterangepicker.js' %}" type ="text/javascript"></script>
+    <script src="{% static 'js/global.js' %}" type ="text/javascript"></script>
+    <script src="{% static 'js/main.js' %}" type ="text/javascript"></script>
+{% endblock %}
+{% endblock %}

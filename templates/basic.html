@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <meta charset="utf-8">
+  <link href="{% static 'image/bg1.png' %}" rel="icon">
+  <link href="{% static 'image/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  {% block cstyle %} {% endblock %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/bootstrap/css/bootstrap.min.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/icofont/icofont.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/boxicons/css/boxicons.min.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/owl.carousel/assets/owl.carousel.min.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/venobox/venobox.css' %}" >
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor/aos/aos.css' %}" >
+  {% block script %}
+  {% endblock %}
+</head>
+<body>
+<header id="header"  class="fixed-top">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <h1 class="text-light" style="color:#FFFFFF;"><a href="index.html">FACE RECOGNITION ATTENDANCE SYSTEM</a></h1>
+      </div>
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'index' %}#about">About Us</a></li>
+          <li><a href="{% url 'index' %}#services">Services</a></li>
+          <li><a href="{% url 'index' %}#contact">Contact Us</a></li>
+          <li class="drop-down"><a href="">Login</a>
+            <ul>
+              <li><a href="{% url 'S_Login' %}">Student</a></li>
+              <li><a href="{% url 'F_login' %}">Faculty</a></li>
+              <li><a href='admin'>Admin</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+</header>
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <script src="{% static 'css/vendor/jquery/jquery.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/jquery.easing/jquery.easing.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/php-email-form/validate.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/owl.carousel/owl.carousel.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/isotope-layout/isotope.pkgd.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/venobox/venobox.min.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'css/vendor/aos/aos.js' %}" type ="text/javascript"></script>
+  <script src="{% static 'js/main.js' %}" type ="text/javascript"></script>
+{% block pagecontent %}
+{% block webcam %}
+{% block js %}
+{% endblock %}
+{% endblock %}
+{% endblock %}
+</body>
+</html>

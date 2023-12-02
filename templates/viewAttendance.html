@@ -1,0 +1,74 @@
+{% extends 'basic1.html' %}
+{% block css %}
+table
+{
+    overflow:scroll;
+    width:900px;
+}
+table, th, td
+{
+    font-size:10pt;
+    border:2px solid black;
+    border-collapse:collapse;
+    text-align:center;
+}
+th, td {padding: 5px;}
+th { color:black; }
+.my-custom-scrollbar {
+position: relative;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+{% endblock %}
+
+{% block body %}
+ {% load static %}
+
+{% csrf_token %}
+<div class="container" style="margin-right:90px; margin-top:100px;">
+    {% for r in res %}
+    <h1> Welcome, {{r.first_name}}</h1>
+    {% endfor %}
+</div>
+
+<div class="container" style="margin-right:90px; margin-top:50px;">
+	<div class="container-fluid tm-main" style="background-color:#2f4f4f; color:#FFFFFF;">
+    <form action='viewA' method="post">{% csrf_token %}
+		 <div class="form-row">
+             <div class="col-sm-12">
+                 <br><header><h2 class="tm-text-shadow"> Today's Attendance</h2></header>
+             </div>
+			 <div class="col-md-4">
+                    <br><label> Subject: </label>
+                 <select name="sub_name" id="subname" style="background-color:#FFFFFF;color:#000000" required>
+						 <option disabled="disabled" selected="selected">Choose option</option>
+						 {% for s_name in subname %}
+						 <option>{{ s_name }}</option>
+						 {% endfor %}
+					 </select>
+				 <div class="select-dropdown"></div>
+				 <div class="clearfix"> </div>
+            </div>
+             <center>
+                 <button type="submit" style="color:#000000; margin-top:40px; margin-right:250px; margin-bottom:20px;">
+                 <h3>View Sheet</h3>
+              </button><br>
+             </center>
+         </div>
+	</form>
+    </div>
+	<div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top:30px; margin-left:120px;">
+	{% autoescape off %}
+	{{ d }}
+	{% endautoescape %}
+	</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
